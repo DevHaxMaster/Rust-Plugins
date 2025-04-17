@@ -356,3 +356,40 @@ namespace Oxide.Plugins
             Interface.Oxide.DataFileSystem.WriteObject(LogFileName, toxicLog);
     }
 }
+
+/*
+Admin Console Commands (RCON/Server Console):
+
+tox.settoxic <SteamID> [duration]
+ Marks a player toxic (blocks PvP, PvE, chat, and voice). Defaults to an hour
+ **You can set to anytime you want just do 1h or 1m to indicate minutes or hours**
+
+tox.cleartoxic <SteamID>
+ Clears toxic status and restores previous PvP permission (verified)
+Does NOT remove perms, overrides it
+
+ Lists all currently toxic players <SteamIDs> with time remaining.
+
+tox.log <SteamID> -- shows admins all the times they were marked as toxic
+
+Oxide Commands:
+
+oxide.usergroup add <steamID> toxic: Manually mark a player permanently toxic (fully enforced).
+oxide.usergroup remove <steamID> toxic: Manually clear permanent toxic status (restores permissions)
+
+Key Set Up:
+Apply = RustRpDamageControl.allowdamage to Verified Oxide Group
+oxide.grant group default RustRpDamageControl.allowdamage
+
+Apply = RustRpDamageControl.toxictime to default  Oxide group
+oxide.grant group default RustRpDamageControl.toxictime
+
+Logging Files
+RustRpDamageControlDataFile.json: Stores active toxic status for each player.
+RustRpDamageControl_LogFile.json: Logs every toxic action with timestamp (UTC).
+
+Notes:
+- When you add time to someone being toxic, if not perm, it will add the total time for each time the comamand is used
+- The perms will stick during a disconnect / reconnect
+
+*/
